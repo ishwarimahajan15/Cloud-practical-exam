@@ -18,7 +18,7 @@ pipeline {
     }
 
     tools {
-        jdk 'JDK17'
+        jdk 'JDK21'
         maven 'Maven'
     }
 
@@ -32,13 +32,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvnw.cmd clean compile'
+                sh 'mvn clean compile'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'mvnw.cmd test'
+                sh 'mvn test'
             }
             post {
                 always {
@@ -49,7 +49,7 @@ pipeline {
 
         stage('Package') {
             steps {
-                bat 'mvnw.cmd package'
+                sh 'mvn package'
                 archiveArtifacts artifacts: 'target/*.jar',
                                  fingerprint: true,
                                  allowEmptyArchive: false
@@ -62,9 +62,8 @@ pipeline {
             }
             steps {
                 script {
-                    def targetDir = "${env.WORKSPACE}\\deploy\\${params.ENVIRONMENT}"
-                    bat "if not exist \"${targetDir}\" mkdir \"${targetDir}\""
-                    bat "copy /Y target\\*.jar \"${targetDir}\\\""
+                    def targetDir = "deploy/${params.ENVIRONMENT}"
+                    sh "mkdir -p '${targetDir}' && cp target/*.jar '${targetDir}/'"
                     echo "Deployed artifact to ${targetDir}"
                 }
             }

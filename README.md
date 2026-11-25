@@ -21,7 +21,7 @@ java -jar target\declarative-pipeline-demo-1.0.0.jar Student
 ## Jenkins setup
 
 1. Install Jenkins with the JDK 17 and Maven plugins/tools.
-2. Configure global Jenkins tools named `JDK17` and `Maven`.
+2. Configure a JDK 21 tool named `JDK21` and a Maven tool named `Maven` (the Maven installer can download Maven automatically).
 3. Create a Pipeline job.
 4. Set **Pipeline: Definition** to **Pipeline script from SCM**.
 5. Choose Git and enter this repository URL.
