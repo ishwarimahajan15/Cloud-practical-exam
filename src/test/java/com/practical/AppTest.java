@@ -12,7 +12,7 @@ class AppTest {
 
     @Test
     void returnsPersonalGreeting() {
-        assertEquals("Hello, Student!", App.greeting("Student"));
+        assertEquals("Hello, Jenkins!", App.greeting("Student"));
     }
 
     @Test
